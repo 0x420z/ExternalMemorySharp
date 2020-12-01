@@ -6,20 +6,20 @@
     <Authors>CorrM</Authors>
     <Company>CorrM</Company>
     <Product>CorrM</Product>
-    <Version>1.4.3</Version>
+    <Version>1.4.4</Version>
     <Description>Easy way to read and write memory for external apps and games</Description>
     <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
     <Copyright>CorrM</Copyright>
     <PackageProjectUrl>https://corrm.github.io/ExternalMemorySharp/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/CorrM/ExternalMemorySharp</RepositoryUrl>
     <PackageTags>Memory, CorrM</PackageTags>
-    <PackageReleaseNotes>Improves</PackageReleaseNotes>
+    <PackageReleaseNotes>Move to .Net stander 2.1</PackageReleaseNotes>
 
     <LangVersion>latest</LangVersion>
 
-    <AssemblyVersion>1.4.3.0</AssemblyVersion>
+    <AssemblyVersion>1.4.4.0</AssemblyVersion>
 
-    <FileVersion>1.4.3.0</FileVersion>
+    <FileVersion>1.4.4.0</FileVersion>
 
     <RootNamespace>ExternalMemory</RootNamespace>
   </PropertyGroup>
