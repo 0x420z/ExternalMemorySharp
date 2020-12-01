@@ -3,12 +3,11 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace ExternalMemory.Helper
+namespace ExternalMemory.EmsHelper
 {
     /// <summary>
     /// Static class providing tools for extracting information related to types.
     /// </summary>
-    /// <typeparam name="T">Type to analyze.</typeparam>
     public class MarshalType
     {
         #region Properties

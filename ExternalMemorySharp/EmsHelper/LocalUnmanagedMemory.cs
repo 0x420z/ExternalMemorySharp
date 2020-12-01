@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace ExternalMemory.Helper
+namespace ExternalMemory.EmsHelper
 {
     public class LocalUnmanagedMemory : IDisposable
     {
@@ -55,7 +55,6 @@ namespace ExternalMemory.Helper
         /// <summary>
         /// Reads data from the unmanaged block of memory.
         /// </summary>
-        /// <typeparam name="T">The type of data to return.</typeparam>
         /// <returns>The return value is the block of memory casted in the specified type.</returns>
         public object Read(Type type)
         {

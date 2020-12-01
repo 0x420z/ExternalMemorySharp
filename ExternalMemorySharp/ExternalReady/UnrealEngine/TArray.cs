@@ -82,7 +82,6 @@ namespace ExternalMemory.ExternalReady.UnrealEngine
             // Get TArray Data
             Ems.ReadBytes(Data, (uint)(Items.Count * itemSize), out byte[] tArrayData);
             var bytes = new List<byte>(tArrayData);
-
             int offset = 0;
             foreach (T item in Items)
             {
@@ -101,7 +100,6 @@ namespace ExternalMemory.ExternalReady.UnrealEngine
 
                 // Update current item
                 item.UpdateAddress(itemAddress);
-
                 // Set Data
                 if (ReadInfo.IsPointerToData)
                     item.UpdateData();

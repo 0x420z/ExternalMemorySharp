@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ExternalMemory.Helper;
+using ExternalMemory.EmsHelper;
 
 namespace ExternalMemory
 {
@@ -15,13 +15,14 @@ namespace ExternalMemory
         public static ExternalMemorySharp MainEms { get; set; }
         public static int MaxStringLen { get; set; } = 64;
 
+        #region [ Delegates ]
 
-        #region Delegates
         public delegate bool ReadCallBack(UIntPtr address, ulong size, out byte[] bytes);
         public delegate bool WriteCallBack(UIntPtr address, byte[] bytes);
+
         #endregion
 
-        #region Props
+        #region [ Props ]
         public ReadCallBack ReadBytesCallBack { get; }
         public WriteCallBack WriteBytesCallBack { get; }
         public bool Is64BitGame { get; }
@@ -35,18 +36,7 @@ namespace ExternalMemory
             ReadBytesCallBack = readBytesDelegate;
             WriteBytesCallBack = writeBytesDelegate;
         }
-        public bool ReadBytes(UIntPtr address, uint size, out byte[] bytes)
-        {
-            bool retState = ReadBytesCallBack(address, size, out bytes);
-            // if (!retState)
-                // throw new Exception($"Can't read memory at `0x{address.ToInt64():X8}`");
 
-            return retState;
-        }
-        public bool WriteBytes(UIntPtr address, byte[] bytes)
-        {
-            return WriteBytesCallBack(address, bytes);
-        }
         private string ReadString(UIntPtr lpBaseAddress, bool isUnicode = false)
         {
             int charSize = isUnicode ? 2 : 1;
@@ -71,6 +61,19 @@ namespace ExternalMemory
         {
             foreach (ExternalOffset unrealOffset in unrealOffsets)
                 unrealOffset.RemoveValueAndData();
+        }
+
+        public bool ReadBytes(UIntPtr address, uint size, out byte[] bytes)
+        {
+            bool retState = ReadBytesCallBack(address, size, out bytes);
+            // if (!retState)
+                // throw new Exception($"Can't read memory at `0x{address.ToInt64():X8}`");
+
+            return retState;
+        }
+        public bool WriteBytes(UIntPtr address, byte[] bytes)
+        {
+            return WriteBytesCallBack(address, bytes);
         }
 
         internal bool ReadClass<T>(T instance, UIntPtr address, byte[] fullClassBytes) where T : ExternalClass
@@ -187,14 +190,12 @@ namespace ExternalMemory
             }
 
             // Read Full Class
-            if (!ReadBytes(address, (uint)instance.ClassSize, out byte[] fullClassBytes))
-            {
-                // Clear All Class Offset
-                RemoveValueData(instance.Offsets);
-                return false;
-            }
+            if (ReadBytes(address, (uint)instance.ClassSize, out byte[] fullClassBytes))
+                return ReadClass(instance, address, fullClassBytes);
 
-            return ReadClass(instance, address, fullClassBytes);
+            // Clear All Class Offset
+            RemoveValueData(instance.Offsets);
+            return false;
         }
 
         public bool ReadClass<T>(T instance, int address) where T : ExternalClass => ReadClass(instance, (UIntPtr)address);

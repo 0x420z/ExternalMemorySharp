@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ExternalMemory.Helper
+namespace ExternalMemory.EmsHelper
 {
     public static class TopologicalSorter
     {

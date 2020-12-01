@@ -9,7 +9,9 @@ namespace ExternalMemory.ExternalReady.UnrealEngine
 		#endregion
 
 		#region Props
+
 		public T Value => (T)(object)_enumVal.Read();
+
 		#endregion
 
 		public TEnumAsByte(ExternalMemorySharp emsInstance, UIntPtr address) : base(emsInstance, address) { }
